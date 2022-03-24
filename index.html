@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./assets/pokebola.ico" />
+    <title>Pokedex LaunchX</title>
+</head>
+
+<body>
+    <div class="borde container" style="text-align: center;">
+        <div class="row">
+            <div class="borde rojo col-sm-6">
+                <div class="borde container">
+                    <div class="borde row">
+                        <div class="borde col-sm-6"><!--*******Parte de los focos*******-->
+                            <div class="container">
+                                <div class="row">
+                                    <div class="camara col-sm-1"></div>
+                                    <div class="foco-rojo col-sm-1"></div>
+                                    <div class="foco-amarillo col-sm-1"></div>
+                                    <div class="foco-verde col-sm-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="borde col-sm-6"><!--*******Parte del titulo*******-->
+                            <h2>Pokedex LaunchX</h2>
+                        </div>
+                    </div>
+                    <div class="borde row">
+                        <div class="col-sm-2"></div>
+                        <div class="pantalla borde col-sm-8"><!--*******Parte de pantalla principal*******-->
+                            <img src="./assets/pokebola.png" alt="Pokemon" id="pokeImg"/>
+                            <label id="pokeNombre" class="letra-verde" style="padding-top: 1%;"></label>
+                        </div>
+                        <div class="col-sm-2"></div>
+                    </div>
+                    <div class="borde row">
+                        <div class="borde col-sm-6"><!--*******Parte de busqueda*******-->
+                                <h3>Buscar pokémon por:</h3><br>
+                                <input type="radio" id="radioNombre" name="busqueda" onclick="cambiarInput()" placeholder="Por nombre">
+                                <label>Por nombre </label>
+                                <input type="radio" id="radioNumero" name="busqueda" onclick="cambiarInput()" placeholder="Por número">
+                                <label> Por número</label><br><br>
+                                <input class="input-busqueda" type="text" placeholder="Nombre o N° del pokémon" id="pokeName" name="pokeName" pattern="[a-z]" style="width:-webkit-fill-available ;"/><br /><br>
+                                <button class="boton-buscar" onclick="fetchPokemon()" style="width:-webkit-fill-available ;">Buscar pokémon</button><br><br>
+                        </div>
+                        <div class="borde col-sm-6" ><!--*******Cruzeta*******-->
+                            <div class="container"><br>
+                                <div class="row">
+                                    <div class="col-2"></div>
+                                    <div type="button" onclick="restaurar()" class="borde btn-relleno-verde col-3">R</div>
+                                    <div class="col-2"></div>
+                                    <div type="button" onclick="restaurar()" class="borde btn-relleno-amarillo col-3">R</div>
+                                    <div class="col-2"></div>
+                                </div><br>
+                                <div class="row">
+                                    <div class="col-4 col-lg-5"></div>
+                                    <div type="button"class=" gris borde col-3"></div>
+                                    <div class="col-4"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-1 col-sm-3 col-lg-2"></div>
+                                    <div type="button"class="gris borde col-3"></div>
+                                    <div type="button"class="gris borde col-3"></div>
+                                    <div type="button"class="gris borde col-3"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 col-lg-5"></div>
+                                    <div type="button"class="gris borde col-3"></div>
+                                </div><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--*******Pokedex DERECHO*******-->
+            <div class="borde rojo col-sm-6">
+                <div class="borde container">
+                    <div class="borde row">
+                        <div class="borde col-sm-12">
+                            <h1>Carácteristicas del Pokémon</h1>
+                        </div>
+                    </div><br>
+                    <div class="borde row">
+                        <div class="col-sm-2"></div>
+                        <!--*******Pantalla resultado*******-->
+                        <div class="pantalla-res col-sm-8" style="text-align: left;">
+                            <label class="letra-verde">Tipo: </label>
+                            <label id="tipo" class="letra-verde-sm"></label><br>
+                            <label class="letra-verde">Estadísticas:</label>
+                            <div class="container stats">
+                                <div class="borde row">
+                                    <div class="col-sm-6"  style="font-size: 1rem; text-align: center; font-weight: bold; word-break:break-all;">PS</div>
+                                    <div class="col-sm-2" id="PS" style="text-align: center;"></div>
+                                    <div class="col-sm-4 col-md-12 col-lg-4">
+                                        <div class="progress" style="margin-top: 5px;">
+                                            <div class="progress-bar" id="PS-BAR" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="borde row">
+                                    <div class="col-sm-6"  style="font-size: .96rem; text-align: center; font-weight: bold; word-break:break-all;">Ataque</div>      
+                                    <div class="col-sm-2" id="AT" style="text-align: center;"></div>
+                                    <div class="col-sm-4 col-md-12 col-lg-4">
+                                        <div class="progress" style="margin-top: 5px;">
+                                            <div class="progress-bar" id="AT-BAR"role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>                                  
+                                </div>
+                                <div class="borde row">
+                                    <div class="col-sm-6"  style="font-size: .94rem; text-align: center; font-weight: bold; word-break:break-all;">Defensa</div>
+                                    <div class="col-sm-2" id="DF" style="text-align: center;"><p id="DF"></p></div>
+                                    <div class="col-sm-4 col-md-12 col-lg-4">
+                                        <div class="progress" style="margin-top: 5px;">
+                                            <div class="progress-bar" id="DF-BAR" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="borde row">
+                                    <div class="col-sm-6"  style="font-size: .80rem; text-align: center; font-weight: bold; word-break:normal;">Ataque esp</div>
+                                    <div class="col-sm-2" id="ES-AT" style="text-align: center;"></div>
+                                    <div class="col-sm-4 col-md-12 col-lg-4">
+                                        <div class="progress" style="margin-top: 5px;">
+                                            <div class="progress-bar" id="ES-AT-BAR" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="borde row">
+                                    <div class="col-sm-6"  style="font-size: .80rem; text-align: center; font-weight: bold; word-break:normal;">Defensa esp</div>
+                                    <div class="col-sm-2" id="ES-DF" style="text-align: center;"></div>
+                                    <div class="col-sm-4 col-md-12 col-lg-4">
+                                        <div class="progress" style="margin-top: 5px;">
+                                            <div class="progress-bar" id="ES-DF-BAR" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="borde row">
+                                    <div class="col-sm-6"  style="font-size: .85rem; text-align: center; font-weight: bold; word-break:normal;">Velocidad</div>
+                                    <div class="col-sm-2" id="VL" style="text-align: center;"></div>
+                                    <div class="col-sm-4 col-md-12 col-lg-4">
+                                        <div class="progress" style="margin-top: 5px;">
+                                            <div class="progress-bar" id="VL-BAR" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2"></div>
+                    </div><br>
+                    <div class="borde row">
+                        <div class="borde col-sm-12">
+                            <div class="container">
+                                <!--*******Pantalla movimientos con botones*******-->
+                                <br>
+                                <div class="row">
+                                    <div class="pantalla-mov col-sm-8">
+                                        <label id="T-MOV" class="letra-verde">Total de movimientos: </label><br><br>
+                                        <label class="letra-verde">Mov.<label id="R-MOV-1"></label> de <label id="R-MOV-2"></label> : </label>
+                                        <label id="MOV"class="letra-verde-sm"></label><br>
+                                    </div>
+                                    <div class="col-sm-2 col-6">
+                                        <button class="boton-nav" onclick="movAnterior()">&laquo;</button>
+                                    </div>
+                                    <div class="col-sm-2 col-6">
+                                        <button class="boton-nav" onclick="movSiguiente()">&raquo;</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <br>
+                                </div>
+                                <!--*******Botones relleno*******-->
+                                <div class="row">
+                                    <div class="col-1"></div>
+                                    <div class="borde boton-relleno col-2">1</div>
+                                    <div class="borde boton-relleno col-2">2</div>
+                                    <div class="borde boton-relleno col-2">3</div>
+                                    <div class="borde boton-relleno col-2">4</div>
+                                    <div class="borde boton-relleno col-2">5</div>
+                                    <div class="col-1"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-1"></div>
+                                    <div class="borde boton-relleno col-2">6</div>
+                                    <div class="borde boton-relleno col-2">7</div>
+                                    <div class="borde boton-relleno col-2">8</div>
+                                    <div class="borde boton-relleno col-2">9</div>
+                                    <div class="borde boton-relleno col-2">10</div>
+                                    <div class="col-1"></div>
+                                </div>
+                            </div><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<footer>
+    <script src="./pokedex.js"></script>
+</footer>
+
+</html>
